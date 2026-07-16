@@ -238,6 +238,7 @@ main { flex: 1; }
 
 @media (max-width: 880px) {
   .nav-toggle { display: flex; }
+  .brand-mark { height: 60px; }
   .nav-links {
     position: absolute;
     top: 100%;
@@ -599,9 +600,7 @@ main { flex: 1; }
   background: linear-gradient(160deg, var(--tile) 50%, var(--gold) 90%);
   border-radius: var(--radius);
   padding: 2rem;
-  text-align:center;
-  max-width:700px;
-  margin:0 auto 60px;
+  text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .about-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
@@ -623,9 +622,7 @@ main { flex: 1; }
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 2rem 1.75rem;
-  text-align:center;
-  max-width:700px;
-  margin:0 auto 60px;
+  text-align: center;
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
 }
 .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg), 0 0 0 1px var(--tile); border-color: transparent; }
@@ -1139,6 +1136,23 @@ main { flex: 1; }
 
   .section { padding: 3.5rem 1.25rem; }
   .hero { padding: 4rem 1.25rem 3rem; }
+
+  /* These two never got a mobile override before, so they stayed at
+     full desktop padding while every other section shrank - that
+     mismatch was a big part of the "inconsistent spacing" feeling. */
+  .navbar { padding: 0.4rem 1.25rem; }
+  .footer { padding: 2.5rem 1.25rem 1.5rem; }
+
+  /* Normalize grid/gallery gaps so the rhythm between cards matches
+     across every section on mobile, not just some of them. */
+  .about-grid,
+  .feature-grid,
+  .pricing-cards-container,
+  .contact-grid,
+  .footer-columns {
+    gap: 1.25rem;
+  }
+  .phone-gallery { gap: 1.25rem; }
 }
 
 /* ---------- Get the App modal ---------- */
