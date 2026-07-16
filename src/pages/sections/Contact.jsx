@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Reveal from "../../components/Reveal.jsx";
+import { useLanguage } from "../../i18n/LanguageContext.jsx";
 
 const SUPPORT_EMAIL = "support.hudhudedu@gmail.com";
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [sent, setSent] = useState(false);
 
   const handleSubmit = (e) => {
@@ -15,39 +17,35 @@ export default function Contact() {
   return (
     <section className="section contact-section" id="contact">
       <div className="section-heading">
-        <span className="eyebrow eyebrow--dark">Contact</span>
-        <h2>We're here to help</h2>
-        <p className="section-subtitle">
-          Questions about the app or your subscription? Reach us directly.
-        </p>
+        <span className="eyebrow eyebrow--dark">{t("contact.eyebrow")}</span>
+        <h2>{t("contact.title")}</h2>
+        <p className="section-subtitle">{t("contact.subtitle")}</p>
       </div>
 
       <div className="contact-grid">
         <Reveal>
           <div className="contact-info-card">
-            <h3>Support</h3>
+            <h3>{t("contact.supportTitle")}</h3>
             <a href={`mailto:${SUPPORT_EMAIL}`} className="contact-email">
               {SUPPORT_EMAIL}
             </a>
-            <p>We usually reply within 1–2 business days.</p>
+            <p>{t("contact.replyTime")}</p>
           </div>
         </Reveal>
 
         <Reveal delay={120}>
           <div className="contact-form-box">
             {sent ? (
-              <p className="success-message">
-                Thanks — your message has been sent. We'll get back to you soon.
-              </p>
+              <p className="success-message">{t("contact.successMessage")}</p>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
-                <input id="name" type="text" placeholder="Name" required />
-                <input id="email" type="email" placeholder="Email" required />
-                <input id="subject" type="text" placeholder="Subject" />
-                <textarea id="message" rows={5} placeholder="Message" required />
+                <input id="name" type="text" placeholder={t("contact.namePlaceholder")} required />
+                <input id="email" type="email" placeholder={t("contact.emailPlaceholder")} required />
+                <input id="subject" type="text" placeholder={t("contact.subjectPlaceholder")} />
+                <textarea id="message" rows={5} placeholder={t("contact.messagePlaceholder")} required />
 
                 <button className="contact-submit" type="submit">
-                  SUBMIT
+                  {t("contact.submit")}
                 </button>
               </form>
             )}

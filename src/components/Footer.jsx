@@ -1,4 +1,5 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 const SUPPORT_EMAIL = "support.hudhudedu@gmail.com";
 
@@ -37,16 +38,18 @@ const SOCIAL_LINKS = [
 ];
 
 const QUICK_LINKS = [
-  { to: "/", label: "Home" },
-  { to: "/#about", label: "About Us" },
-  { to: "/#features", label: "Features" },
-  { to: "/#pricing", label: "Pricing" },
-  { to: "/#faq", label: "FAQs" },
+  { to: "/", key: "Home" },
+  { to: "/#about", key: "About Us" },
+  { to: "/#features", key: "Features" },
+  { to: "/#pricing", key: "Pricing" },
+  { to: "/#faq", key: "FAQs" },
 ];
 
 export default function Footer() {
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
+  const quickLinks = t("footer.quickLinks");
 
   // Same fix as the navbar's "Get the App" button: clicking a Link to a
   // hash/path you're already on doesn't reliably re-trigger navigation
@@ -73,9 +76,7 @@ export default function Footer() {
       <div className="footer-columns">
         <div className="footer-col footer-col--brand">
           <img src="/icon2.png" alt="Hudhud Edu" className="footer-logo" />
-          <p className="footer-tagline">
-            Learn English the smart way, built for Uzbek speakers.
-          </p>
+          <p className="footer-tagline">{t("footer.tagline")}</p>
           <div className="footer-social">
             {SOCIAL_LINKS.map((s) => (
               <a
@@ -92,35 +93,33 @@ export default function Footer() {
         </div>
 
         <div className="footer-col">
-          <h4>Quick Links</h4>
+          <h4>{t("footer.quickLinksTitle")}</h4>
           {QUICK_LINKS.map((link) => (
             <a
-              key={link.label}
+              key={link.key}
               href={link.to}
               onClick={(e) => handleQuickLink(e, link.to)}
             >
-              {link.label}
+              {quickLinks[link.key]}
             </a>
           ))}
         </div>
 
         <div className="footer-col">
-          <h4>Policies</h4>
-          <Link to="/privacy-policy">Privacy Policy</Link>
-          <Link to="/terms">Terms and Conditions</Link>
+          <h4>{t("footer.policiesTitle")}</h4>
+          <Link to="/privacy-policy">{t("footer.privacyPolicy")}</Link>
+          <Link to="/terms">{t("footer.termsAndConditions")}</Link>
         </div>
 
         <div className="footer-col">
-          <h4>Contact</h4>
-          <a href={`mailto:${SUPPORT_EMAIL}`}>Email: {SUPPORT_EMAIL}</a>
+          <h4>{t("footer.contactTitle")}</h4>
+          <a href={`mailto:${SUPPORT_EMAIL}`}>{t("footer.emailLabel")}: {SUPPORT_EMAIL}</a>
         </div>
       </div>
 
       <div className="footer-divider" />
 
-      <p className="footer-copyright">
-        © {new Date().getFullYear()} Hudhud Edu. All rights reserved.
-      </p>
+      <p className="footer-copyright">{t("footer.copyright", { year: new Date().getFullYear() })}</p>
     </footer>
   );
 }

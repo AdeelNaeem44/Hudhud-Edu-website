@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import AppStoreButtons from "./AppStoreButtons.jsx";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 export default function GetAppModal({ open, onClose }) {
+  const { t } = useLanguage();
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -35,10 +38,8 @@ export default function GetAppModal({ open, onClose }) {
           </svg>
         </span>
 
-        <h3 id="app-modal-title">Get the Hudhud Edu App</h3>
-        <p className="app-modal-subtitle">
-          Download the app on your phone and start learning English vocabulary today.
-        </p>
+        <h3 id="app-modal-title">{t("modal.title")}</h3>
+        <p className="app-modal-subtitle">{t("modal.subtitle")}</p>
 
         <div className="app-modal-badges">
           <AppStoreButtons />

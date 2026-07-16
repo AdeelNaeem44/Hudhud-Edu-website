@@ -2,20 +2,23 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../AuthContext.jsx";
 import GetAppModal from "./GetAppModal.jsx";
-
-const LINKS = [
-  { href: "/#about", label: "About" },
-  { href: "/#features", label: "Features" },
-  { href: "/#previews", label: "Previews" },
-  { href: "/#pricing", label: "Pricing" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/#contact", label: "Contact" },
-];
+import LanguageSwitcher from "./LanguageSwitcher.jsx";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [appModalOpen, setAppModalOpen] = useState(false);
   const { user } = useAuth();
+  const { t } = useLanguage();
+
+  const LINKS = [
+    { href: "/#about", label: t("nav.about") },
+    { href: "/#features", label: t("nav.features") },
+    { href: "/#previews", label: t("nav.previews") },
+    { href: "/#pricing", label: t("nav.pricing") },
+    { href: "/#faq", label: t("nav.faq") },
+    { href: "/#contact", label: t("nav.contact") },
+  ];
 
   return (
     <header className="navbar">
@@ -41,8 +44,9 @@ export default function Navbar() {
           </Link>
         ))}
         <Link to="/login" className="nav-login" onClick={() => setOpen(false)}>
-          {user ? "My Account" : "Log in"}
+          {user ? t("nav.myAccount") : t("nav.login")}
         </Link>
+        <LanguageSwitcher onSelect={() => setOpen(false)} />
         <button
           type="button"
           className="btn-primary"
@@ -51,7 +55,7 @@ export default function Navbar() {
             setAppModalOpen(true);
           }}
         >
-          Get the App
+          {t("nav.getApp")}
         </button>
       </nav>
 

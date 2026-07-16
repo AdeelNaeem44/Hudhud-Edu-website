@@ -229,6 +229,59 @@ main { flex: 1; }
 .nav-login:hover { border-color: var(--tile) !important; color: var(--tile); }
 .nav-login::after { display: none; }
 
+.lang-switcher { position: relative; }
+.lang-switcher-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 1.5px solid var(--sand-dim);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.lang-switcher-toggle svg { width: 18px; height: 18px; flex-shrink: 0; }
+.lang-switcher-toggle:hover { border-color: var(--tile); color: var(--tile); }
+.lang-switcher-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  padding: 0.4rem;
+  min-width: 150px;
+  z-index: 110;
+  list-style: none;
+}
+.lang-switcher-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.lang-switcher-option:hover { background: var(--sand); color: var(--tile); }
+.lang-switcher-option--active { color: var(--tile); background: var(--sand); }
+
+@media (max-width: 880px) {
+  .lang-switcher { align-self: flex-start; margin: 0.6rem 2rem; }
+  .lang-switcher-toggle { width: 100%; justify-content: center; }
+  .lang-switcher-menu { position: static; box-shadow: none; margin-top: 0.4rem; border: 1px solid var(--sand-dim); }
+}
+
 @keyframes ctaPulse {
   0%, 100% { box-shadow: var(--glow); }
   50% { box-shadow: 0 10px 34px rgba(46, 125, 234, 0.65); }

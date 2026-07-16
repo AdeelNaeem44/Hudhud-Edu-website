@@ -1,4 +1,5 @@
 import Reveal from "../../components/Reveal.jsx";
+import { useLanguage } from "../../i18n/LanguageContext.jsx";
 
 // NOTE: This 3-tier structure (Basic / Growth / Pro) and the free trial
 // are NOT part of the supervisor-approved content doc, which only
@@ -7,66 +8,36 @@ import Reveal from "../../components/Reveal.jsx";
 // placeholders for review, not approved figures.
 const FREE_TRIAL_DAYS = 3;
 
-const PLANS = [
-  {
-    name: "Basic",
-    price: "30,000",
-    period: "/ mo",
-    description: "Perfect for beginners just getting started.",
-    features: [
-      "Basic vocabulary library",
-      "Limited quizzes (5/day)",
-      "Progress tracking",
-    ],
-  },
-  {
-    name: "Growth",
-    price: "60,000",
-    period: "/ mo",
-    description: "Ideal for learners building a daily habit.",
-    features: [
-      "Full vocabulary library",
-      "Unlimited interactive quizzes",
-      "Progress tracking & rankings",
-      "All gamification features",
-    ],
-    highlighted: true,
-  },
-  {
-    name: "Pro",
-    price: "100,000",
-    period: "/ mo",
-    description: "Built for learners who want it all.",
-    features: [
-      "Everything in Growth, plus:",
-      "Advanced analytics & insights",
-      "Priority support",
-      "Exclusive premium content",
-    ],
-  },
+const PRICES = [
+  { price: "30,000", period: "/ mo" },
+  { price: "60,000", period: "/ mo", highlighted: true },
+  { price: "100,000", period: "/ mo" },
 ];
 
 export default function Pricing() {
+  const { t } = useLanguage();
+  const plans = t("pricing.plans");
+
   return (
     <section className="section pricing-section" id="pricing">
       <div className="section-heading">
-        <span className="eyebrow eyebrow--dark">Pricing</span>
-        <h2>Simple, flexible plans</h2>
-        <h3 className="section-subtitle">Choose the plan that fits your learning goals.</h3>
+        <span className="eyebrow eyebrow--dark">{t("pricing.eyebrow")}</span>
+        <h2>{t("pricing.title")}</h2>
+        <h3 className="section-subtitle">{t("pricing.subtitle")}</h3>
       </div>
 
       <div className="pricing-cards-container">
-        {PLANS.map((plan, i) => (
+        {plans.map((plan, i) => (
           <Reveal key={plan.name} delay={i * 120}>
             <div
-              className={`pricing-card ${plan.highlighted ? "pricing-card--highlighted" : ""}`}
+              className={`pricing-card ${PRICES[i].highlighted ? "pricing-card--highlighted" : ""}`}
             >
-              {plan.highlighted && <div className="pricing-badge">Most Popular</div>}
+              {PRICES[i].highlighted && <div className="pricing-badge">{t("pricing.mostPopular")}</div>}
 
               <span className="pricing-tier-label">{plan.name}</span>
               <div className="pricing-amount">
-                <span className="pricing-price">{plan.price}</span>
-                <span className="pricing-period">UZS {plan.period}</span>
+                <span className="pricing-price">{PRICES[i].price}</span>
+                <span className="pricing-period">UZS {PRICES[i].period}</span>
               </div>
               <p className="pricing-description">{plan.description}</p>
 
@@ -88,9 +59,9 @@ export default function Pricing() {
               </ul>
 
               <div className="pricing-bottom">
-                <p className="pricing-trial-note">{FREE_TRIAL_DAYS}-day free trial included</p>
+                <p className="pricing-trial-note">{t("pricing.trialNote", { days: FREE_TRIAL_DAYS })}</p>
                 <a href="#download" className="pricing-cta">
-                  Get started
+                  {t("pricing.getStarted")}
                 </a>
               </div>
             </div>
@@ -98,9 +69,7 @@ export default function Pricing() {
         ))}
       </div>
 
-      <p className="pricing-fineprint">
-        Subscriptions are managed through the App Store or Google Play.
-      </p>
+      <p className="pricing-fineprint">{t("pricing.fineprint")}</p>
     </section>
   );
 }

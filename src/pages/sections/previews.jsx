@@ -1,15 +1,16 @@
 // Real screenshots go in /public/screenshots/ using these exact filenames.
 // If a file is missing, a placeholder shows instead so the layout never breaks.
 import Reveal from "../../components/Reveal.jsx";
+import { useLanguage } from "../../i18n/LanguageContext.jsx";
 
 const SCREENS = [
-  { label: "Lessons", file: "/screenshots/lessons.png" },
-  { label: "Quiz", file: "/screenshots/quiz.png" },
-  { label: "Progress", file: "/screenshots/progress.png" },
-  { label: "Achievements", file: "/screenshots/achievements.png" },
+  { key: "Lessons", file: "/screenshots/lessons.png" },
+  { key: "Quiz", file: "/screenshots/quiz.png" },
+  { key: "Progress", file: "/screenshots/progress.png" },
+  { key: "Achievements", file: "/screenshots/achievements.png" },
 ];
 
-function PhoneMockup({ label, file }) {
+function PhoneMockup({ label, file, addFileText }) {
   return (
     <div className="phone-mockup">
       <div className="phone-mockup-frame">
@@ -28,7 +29,7 @@ function PhoneMockup({ label, file }) {
           />
           <div className="phone-mockup-fallback">
             <span>{label}</span>
-            <small>Add {file} to see this screen</small>
+            <small>{addFileText}</small>
           </div>
         </div>
       </div>
@@ -38,17 +39,24 @@ function PhoneMockup({ label, file }) {
 }
 
 export default function Screenshots() {
+  const { t } = useLanguage();
+  const labels = t("previews.labels");
+
   return (
     <section className="section screenshots-section" id="previews">
       <div className="section-heading">
-        <span className="eyebrow ">Previews</span>
-        <h2>Explore the features and interface of HUDHUD EDU</h2>
+        <span className="eyebrow ">{t("previews.eyebrow")}</span>
+        <h2>{t("previews.title")}</h2>
       </div>
 
       <div className="phone-gallery">
         {SCREENS.map((s, i) => (
-          <Reveal key={s.label} delay={i * 100}>
-            <PhoneMockup label={s.label} file={s.file} />
+          <Reveal key={s.key} delay={i * 100}>
+            <PhoneMockup
+              label={labels[s.key]}
+              file={s.file}
+              addFileText={t("previews.addFile", { file: s.file })}
+            />
           </Reveal>
         ))}
       </div>

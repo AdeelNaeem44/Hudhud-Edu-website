@@ -7,9 +7,11 @@ import {
 } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
 import { useAuth } from "../AuthContext.jsx";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 export default function Login() {
   const { user } = useAuth();
+  const { t } = useLanguage();
 
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
@@ -58,7 +60,7 @@ export default function Login() {
     try {
       await confirmation.confirm(otp);
     } catch (err) {
-      setError("Incorrect code. Please try again.");
+      setError(t("login.incorrectCode"));
     } finally {
       setLoading(false);
     }
@@ -68,12 +70,12 @@ export default function Login() {
     return (
       <section className="auth-page">
         <div className="auth-card">
-          <h1>You're logged in</h1>
+          <h1>{t("login.loggedInTitle")}</h1>
           <p className="auth-subtitle">
-            Signed in as {user.displayName || user.phoneNumber || user.email}
+            {t("login.signedInAs", { name: user.displayName || user.phoneNumber || user.email })}
           </p>
           <button className="btn-primary" onClick={() => signOut(auth)}>
-            Log out
+            {t("login.logout")}
           </button>
         </div>
       </section>
@@ -83,18 +85,18 @@ export default function Login() {
   return (
     <section className="auth-page">
       <div className="auth-card">
-        <h1>Log in</h1>
-        <p className="auth-subtitle">Access your Hudhud Edu account.</p>
+        <h1>{t("login.title")}</h1>
+        <p className="auth-subtitle">{t("login.subtitle")}</p>
 
         <button className="btn-google" onClick={handleGoogleLogin}>
-          Continue with Google
+          {t("login.continueGoogle")}
         </button>
 
-        <div className="divider">or</div>
+        <div className="divider">{t("login.or")}</div>
 
         {!confirmation ? (
           <form onSubmit={handleSendCode} className="phone-form">
-            <label htmlFor="phone">Phone number</label>
+            <label htmlFor="phone">{t("login.phoneLabel")}</label>
             <input
               id="phone"
               type="tel"
@@ -104,12 +106,12 @@ export default function Login() {
               required
             />
             <button className="btn-primary" type="submit" disabled={loading}>
-              {loading ? "Sending..." : "Send code"}
+              {loading ? t("login.sending") : t("login.sendCode")}
             </button>
           </form>
         ) : (
           <form onSubmit={handleVerifyCode} className="phone-form">
-            <label htmlFor="otp">Enter the 6-digit code</label>
+            <label htmlFor="otp">{t("login.otpLabel")}</label>
             <input
               id="otp"
               type="text"
@@ -119,7 +121,7 @@ export default function Login() {
               required
             />
             <button className="btn-primary" type="submit" disabled={loading}>
-              {loading ? "Verifying..." : "Verify & log in"}
+              {loading ? t("login.verifying") : t("login.verify")}
             </button>
           </form>
         )}
