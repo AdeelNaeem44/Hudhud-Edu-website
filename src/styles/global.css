@@ -205,12 +205,13 @@ main { flex: 1; }
 }
 .nav-toggle span { width: 22px; height: 2px; background: var(--night); border-radius: 2px; transition: transform 0.2s ease, opacity 0.2s ease; }
 
-.nav-links { display: flex; align-items: center; gap: 2.4rem; }
+.nav-links { display: flex; align-items: center; gap: 1.7rem; }
 .nav-links a:not(.btn-primary) {
   position: relative;
   color: var(--ink-soft);
   font-weight: 600;
   font-size: 1.05rem;
+  white-space: nowrap;
   transition: color 0.15s ease;
 }
 .nav-links a:not(.btn-primary)::after {
@@ -225,9 +226,10 @@ main { flex: 1; }
 }
 .nav-links a:not(.btn-primary):hover::after { width: 100%; }
 .nav-links a:not(.btn-primary):hover { color: var(--tile); }
-.nav-login { border: 1.5px solid var(--sand-dim) !important; border-radius: 999px; padding: 0.5rem 1.1rem; transition: border-color 0.15s ease, color 0.15s ease; }
+.nav-login { border: 1.5px solid var(--sand-dim) !important; border-radius: 999px; padding: 0.5rem 1.1rem; white-space: nowrap; transition: border-color 0.15s ease, color 0.15s ease; }
 .nav-login:hover { border-color: var(--tile) !important; color: var(--tile); }
 .nav-login::after { display: none; }
+.nav-links .btn-primary { white-space: nowrap; }
 
 .lang-switcher { position: relative; }
 .lang-switcher-toggle {
@@ -276,7 +278,7 @@ main { flex: 1; }
 .lang-switcher-option:hover { background: var(--sand); color: var(--tile); }
 .lang-switcher-option--active { color: var(--tile); background: var(--sand); }
 
-@media (max-width: 880px) {
+@media (max-width: 1180px) {
   .lang-switcher { align-self: flex-start; margin: 0.6rem 2rem; }
   .lang-switcher-toggle { width: 100%; justify-content: center; }
   .lang-switcher-menu { position: static; box-shadow: none; margin-top: 0.4rem; border: 1px solid var(--sand-dim); }
@@ -289,7 +291,7 @@ main { flex: 1; }
 .nav-links .btn-primary { animation: ctaPulse 2.6s ease-in-out infinite; }
 .nav-links .btn-primary:hover { animation-play-state: paused; }
 
-@media (max-width: 880px) {
+@media (max-width: 1180px) {
   .nav-toggle { display: flex; }
   .brand-mark { height: 60px; }
   .nav-links {
@@ -307,7 +309,11 @@ main { flex: 1; }
     box-shadow: 0 12px 24px rgba(10, 31, 77, 0.12);
     transition: max-height 0.25s ease;
   }
-  .nav-links--open { max-height: 480px; padding: 0.5rem 0; }
+  .nav-links--open {
+    max-height: calc(100vh - 76px);
+    overflow-y: auto;
+    padding: 0.5rem 0;
+  }
   .nav-links a { width: 100%; padding: 0.9rem 2rem; }
   .nav-login { border: none !important; padding: 0.9rem 2rem !important; }
   .nav-links .btn-primary { margin: 0.6rem 2rem; }

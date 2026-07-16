@@ -8,14 +8,12 @@ const LanguageContext = createContext(null);
 function getInitialLanguage() {
   if (typeof window === "undefined") return DEFAULT_LANGUAGE;
 
+  // Once someone has explicitly picked a language, remember that choice.
   const stored = window.localStorage.getItem(STORAGE_KEY);
   if (stored && LANGUAGES.includes(stored)) return stored;
 
-  // Fall back to the browser's language if it's one we support, otherwise
-  // default to English.
-  const browserLang = (window.navigator.language || "").slice(0, 2);
-  if (LANGUAGES.includes(browserLang)) return browserLang;
-
+  // Otherwise every new visitor lands on Uzbek (DEFAULT_LANGUAGE), the
+  // site's primary language, regardless of browser language.
   return DEFAULT_LANGUAGE;
 }
 

@@ -777,4 +777,4 @@ export const translations = {
 };
 
 export const LANGUAGES = ["en", "uz"];
-export const DEFAULT_LANGUAGE = "en";
+export const DEFAULT_LANGUAGE = "uz";
