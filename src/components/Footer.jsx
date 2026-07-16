@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const SUPPORT_EMAIL = "support.hudhudedu@gmail.com";
 
@@ -45,6 +45,29 @@ const QUICK_LINKS = [
 ];
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Same fix as the navbar's "Get the App" button: clicking a Link to a
+  // hash/path you're already on doesn't reliably re-trigger navigation
+  // or scrolling. Handle it directly instead.
+  const handleQuickLink = (e, to) => {
+    e.preventDefault();
+    const [path, hash] = to.split("#");
+    const targetPath = path || "/";
+
+    if (location.pathname === targetPath) {
+      if (hash) {
+        const el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } else {
+      navigate(to);
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="footer-columns">
@@ -71,9 +94,13 @@ export default function Footer() {
         <div className="footer-col">
           <h4>Quick Links</h4>
           {QUICK_LINKS.map((link) => (
-            <Link key={link.label} to={link.to}>
+            <a
+              key={link.label}
+              href={link.to}
+              onClick={(e) => handleQuickLink(e, link.to)}
+            >
               {link.label}
-            </Link>
+            </a>
           ))}
         </div>
 
