@@ -325,7 +325,7 @@ main { flex: 1; }
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 3rem;
+  gap: 1rem;
   align-items: center;
 }
 .hero-copy { text-align: left; }
@@ -485,7 +485,7 @@ main { flex: 1; }
   }
 
   .hero-panel-col {
-    margin-top: 2rem;
+    margin-top: 0;
   }
 
   .hero-download-block {
