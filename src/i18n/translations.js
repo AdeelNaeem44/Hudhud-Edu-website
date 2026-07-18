@@ -488,7 +488,7 @@ export const translations = {
       fineprint: "Obunalar App Store yoki Google Play orqali boshqariladi.",
       plans: [
         {
-          name: "Basic",
+          name: "Weekly",
           description: "Endigina boshlayotganlar uchun ideal.",
           features: [
             "Boshlang'ich so'zlar kutubxonasi",
@@ -496,18 +496,9 @@ export const translations = {
             "Progressni kuzatish",
           ],
         },
+        
         {
-          name: "Growth",
-          description: "Kundalik o'quv odatini shakllantirmoqchi bo'lganlar uchun ideal.",
-          features: [
-            "To'liq so'zlar kutubxonasi",
-            "Cheksiz interaktiv testlar",
-            "Progress va reytinglarni kuzatish",
-            "Barcha o'yinlashtirish imkoniyatlari",
-          ],
-        },
-        {
-          name: "Pro",
+          name: "Monthly",
           description: "Hamma narsani xohlovchi o'quvchilar uchun yaratilgan.",
           features: [
             "Growth tarifidagi hamma narsa, shu jumladan:",

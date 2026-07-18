@@ -1,22 +1,19 @@
 import Reveal from "../../components/Reveal.jsx";
 import { useLanguage } from "../../i18n/LanguageContext.jsx";
 
-// NOTE: This 3-tier structure (Basic / Growth / Pro) and the free trial
-// are NOT part of the supervisor-approved content doc, which only
-// specifies Weekly (20,000 UZS) and Monthly (60,000 UZS). Confirm this
-// structure and these prices before shipping - all UZS amounts below are
-// placeholders for review, not approved figures.
-const FREE_TRIAL_DAYS = 3;
-
+// NOTE: Per supervisor-approved content doc, only Weekly (24,000 UZS) and
+// Monthly (60,000 UZS) tiers are approved. The old 3-tier Basic/Growth/Pro
+// structure and free trial have been removed to match.
 const PRICES = [
-  { price: "30,000", period: "/ mo" },
-  { price: "60,000", period: "/ mo", highlighted: true },
-  { price: "100,000", period: "/ mo" },
+  { price: "24,000 UZS", period: "/ week" },
+  { price: "60,000", period: "/ month", highlighted: true },
 ];
 
 export default function Pricing() {
   const { t } = useLanguage();
-  const plans = t("pricing.plans");
+  // Only render the first two plans (Weekly, Monthly) even if the
+  // translation file still has a third (Pro) entry.
+  const plans = t("pricing.plans").slice(0, 2);
 
   return (
     <section className="section pricing-section" id="pricing">
@@ -59,7 +56,6 @@ export default function Pricing() {
               </ul>
 
               <div className="pricing-bottom">
-                <p className="pricing-trial-note">{t("pricing.trialNote", { days: FREE_TRIAL_DAYS })}</p>
                 <a href="#download" className="pricing-cta">
                   {t("pricing.getStarted")}
                 </a>

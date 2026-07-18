@@ -23,7 +23,7 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <Link to="/" className="brand" onClick={() => setOpen(false)}>
-        <img src="/icon4.png" alt="Hudhud Edu" className="brand-mark" />
+        <img src="/icon3.png" alt="Hudhud Edu" className="brand-mark" />
       </Link>
 
       <button

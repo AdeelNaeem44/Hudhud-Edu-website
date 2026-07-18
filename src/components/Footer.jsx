@@ -3,11 +3,12 @@ import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 const SUPPORT_EMAIL = "support.hudhudedu@gmail.com";
 
-// Replace these with your real profile URLs.
+// Replace these with your real profile URLs. Icons with no href are
+// shown as icon-only (not clickable) until a real link is added.
 const SOCIAL_LINKS = [
   {
     label: "Instagram",
-    href: "https://instagram.com/hudhudedu",
+    href: "", // TODO: add Instagram link
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -27,11 +28,12 @@ const SOCIAL_LINKS = [
     ),
   },
   {
-    label: "Facebook",
-    href: "https://facebook.com/hudhudedu",
+    label: "Youtube",
+    href: "", // TODO: add YouTube link
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z" />
+        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2C5.12 19.5 12 19.5 12 19.5s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33Z" />
+        <path d="m9.75 15.02 5.75-3.27-5.75-3.27v6.54Z" fill="currentColor" stroke="none" />
       </svg>
     ),
   },
@@ -75,20 +77,31 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-columns">
         <div className="footer-col footer-col--brand">
-          <img src="/icon2.png" alt="Hudhud Edu" className="footer-logo" />
+          <img src="/icon3.png" alt="Hudhud Edu" className="footer-logo" />
           <p className="footer-tagline">{t("footer.tagline")}</p>
           <div className="footer-social">
-            {SOCIAL_LINKS.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-              >
-                {s.icon}
-              </a>
-            ))}
+            {SOCIAL_LINKS.map((s) =>
+              s.href ? (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                >
+                  {s.icon}
+                </a>
+              ) : (
+                <a
+                  key={s.label}
+                  aria-label={s.label}
+                  aria-disabled="true"
+                  style={{ cursor: "default" }}
+                >
+                  {s.icon}
+                </a>
+              )
+            )}
           </div>
         </div>
 
