@@ -77,7 +77,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-columns">
         <div className="footer-col footer-col--brand">
-          <img src="/icon5.png" alt="Hudhud Edu" className="footer-logo" />
+          <img src="/icon6.png" alt="Hudhud Edu" className="footer-logo" />
           <p className="footer-tagline">{t("footer.tagline")}</p>
           {/* <div className="footer-social">
             {SOCIAL_LINKS.map((s) =>

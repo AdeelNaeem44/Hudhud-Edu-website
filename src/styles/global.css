@@ -1122,7 +1122,7 @@ main { flex: 1; }
 
 /* ---------- Footer ---------- */
 /* ---------- Footer (4-column layout) ---------- */
-.footer {  background: linear-gradient(to bottom, #85c3f8, #78b3eb);padding: 3.5rem 2.5rem 2rem; }
+.footer {  background-color: #83C1F6;padding: 3.5rem 2.5rem 2rem; }
 
 .footer-columns {
   max-width: 1100px;
